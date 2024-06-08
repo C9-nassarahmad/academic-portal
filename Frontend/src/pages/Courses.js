@@ -8,7 +8,7 @@ const Courses = () => {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await axios.get('/users/courses', {
+      const response = await axios.get('http://localhost:5000/users/courses', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCourses(response.data);
