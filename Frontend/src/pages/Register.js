@@ -6,11 +6,16 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('student');
-
+  const [error, setError] = useState(null)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:5000/users/register', { name, email, password, role });
-    console.log(response.data);
+    try {
+      const response = await axios.post('http://localhost:5000/users/register', { name, email, password, role });
+      console.log('Registration successful:', response.data);
+    } catch (error) {
+      setError('Registration failed. Please try again.'); // Handle specific error messages based on API response
+      console.error('Registration error:', error);
+    }
   };
 
   return (

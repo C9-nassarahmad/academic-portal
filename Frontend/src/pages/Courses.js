@@ -8,12 +8,22 @@ const Courses = () => {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await axios.get('http://localhost:5000/users/courses', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setCourses(response.data);
+      try {
+        const response = await axios.get('http://localhost:5000/users/courses', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setCourses(response.data);
+        
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+        setLoading(false);
+      }
     };
-    fetchCourses();
+
+    if (token) {
+      fetchCourses();
+    }
+
   }, [token]);
 
   return (

@@ -6,15 +6,22 @@ import { useAuth } from '../context/AuthContext';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  //const [error, setError] = useState(null)
   const { login } = useAuth();
 
   const handleSubmit = async (
 e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:5000/users/login', { email, password });
-    login(response.data.token);
-    console.log('Logged in successfully');
+    try {
+      const response = await axios.post('http://localhost:5000/users/login', { email, password });
+      login(response.data.token);
+      console.log('Logged in successfully');
+    } catch (error) {
+      setError('Invalid email or password'); 
+      console.error('Login error:', error);
+    }
   };
+   
 
   return (
     <form onSubmit={handleSubmit}>
