@@ -2,15 +2,16 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 require("./model/db");
-
-
-
-
+//routers
 const app = express();
+
 
 //built-in middleware
 app.use(express.json());
 app.use(cors());
+// router middleware
+
+// TABLES roles / permissions / role_permission
 
 
 
