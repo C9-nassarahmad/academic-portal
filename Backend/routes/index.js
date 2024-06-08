@@ -8,7 +8,7 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 
 router.post('/courses', authenticateToken, courseController.createCourse);
-router.put('/courses', authenticateToken, courseController.updateCourse);
+router.put('/courses/:id', authenticateToken, courseController.updateCourse);
 router.get('/courses', courseController.listCourses);
 
 module.exports = router;

@@ -10,7 +10,13 @@ const createUserTable = async () => {
       role VARCHAR(50)
     )
   `;
-  await pool.query(query);
+  try {
+    const result = await pool.query(query);
+    console.log('Users table created or already exists.',result);
+  } catch (error) {
+    console.error('Error creating users table:', error.message);
+    throw error; 
+  }
 };
 
 module.exports = {
