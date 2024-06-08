@@ -1,29 +1,17 @@
-const jwt = require("jsonwebtoken");
 
-const authentication = (req, res, next) => {
-  try {
-    if (!req.headers.authorization) {
-      console.log({ message: "forbidden" });
-      return res.status(403).json({ message: "forbidden" });
-    }
 
-    const token = req.headers.authorization.split(" ").pop();
+const jwt = require('jsonwebtoken');
+const pool = require('../model/db');
 
-    jwt.verify(token, process.env.SECRET, (err, result) => {
-      if (err) {
-        res.status(403).json({
-          success: false,
-          message: `The token is invalid or expired`,
-        });
-      } else {
-        req.token = result;
-        next();
-      }
-    });
-  } catch (error) {
-    console.log({ message: "forbidden" });
-    res.status(403).json({ message: "forbidden" });
-  }
+const authenticateToken = (req, res, next) => {
+  const token = req.header('Authorization')?.split(' ')[1];
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, 'SECRET_KEY', (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
 };
 
-module.exports = authentication;
+module.exports = authenticateToken;
