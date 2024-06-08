@@ -3,6 +3,10 @@ require("dotenv").config();
 const cors = require("cors");
 require("./model/db");
 //routers
+const bodyParser = require('body-parser');
+const userModel = require('./model/user');
+const courseModel = require('./model/course');
+const routes = require('./routes');
 const app = express();
 
 
