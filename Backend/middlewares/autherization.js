@@ -1,4 +1,4 @@
-const pool = require("../models/db");
+const pool = require("../model/db");
 
 const authorization = (string) => {
   return function (req, res, next) {

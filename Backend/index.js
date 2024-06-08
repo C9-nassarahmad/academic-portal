@@ -13,12 +13,6 @@ const app = express();
 //built-in middleware
 app.use(express.json());
 app.use(cors());
-// router middleware
-
-// TABLES roles / permissions / role_permission
-
-
-
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
